@@ -13,24 +13,7 @@ const colorList = [
   'cinnabar',
 ];
 
-// tạo dãy buttom chọn màu
-const createBtn = () => {
-  let content = colorList.reduce(
-    (partialContent, nextColor) =>
-      partialContent +
-      `<button class="color-button ${nextColor}" onclick="changeColor('${nextColor}')"></button>`,
-    ''
-  );
-  getEle('colorContainer').innerHTML = content;
-};
-
-window.onload = createBtn();
-
-// set active cho button đầu tiên
-let palletColorBtn = document.querySelector('.color-button.pallet');
-palletColorBtn.classList.add('active');
-
-const changeColor = (color) => {
+const onClickHandler = (color) => {
   //thay đổi active khi click các button
   let currentActiveBtn = document.querySelector('.color-button.active');
   if (currentActiveBtn) {
@@ -43,3 +26,20 @@ const changeColor = (color) => {
   let house = getEle('house');
   house.className = `house ${color}`;
 };
+
+// tạo dãy buttom chọn màu
+const createBtn = () => {
+  let content = colorList.reduce(
+    (partialContent, nextColor) =>
+      partialContent +
+      `<button class="color-button ${nextColor}" onclick="onClickHandler('${nextColor}')"></button>`,
+    ''
+  );
+  getEle('colorContainer').innerHTML = content;
+};
+
+window.onload = createBtn();
+
+// set active cho button đầu tiên
+let palletColorBtn = document.querySelector('.color-button.pallet');
+palletColorBtn.classList.add('active');
